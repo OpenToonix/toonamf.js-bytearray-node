@@ -8,28 +8,10 @@ const { deflateSync, deflateRawSync, inflateSync, inflateRawSync } = require('zl
 const { encodingExists, decode, encode } = require('iconv-lite')
 
 /**
- * Our AMF dependencies
- * @constant
- */
-const AMF0 = require('./AMF/AMF0')
-const AMF3 = require('./AMF/AMF3')
-
-/**
  * @exports
  * @class
  */
-module.exports = class ByteArray {
-  /**
-   * Used to preserve class objects
-   * @type {Object}
-   */
-  static classMapping = {}
-  /**
-   * Used to preserve alias strings
-   * @type {Object}
-   */
-  static aliasMapping = {}
-
+class ByteArray {
   /**
    * @constructor
    * @param {Buffer|Array} buffer
@@ -50,11 +32,6 @@ module.exports = class ByteArray {
      * @type {Boolean}
      */
     this.endian = true
-    /**
-     * The AMF object encoding
-     * @type {Number}
-     */
-    this.objectEncoding = 3
   }
 
   /**
@@ -96,40 +73,6 @@ module.exports = class ByteArray {
    */
   get bytesAvailable() {
     return this.length - this.position
-  }
-
-  /**
-   * Returns the class mapping
-   * @returns {Object}
-   */
-  get classMapping() {
-    return ByteArray.classMapping
-  }
-
-  /**
-   * Returns the alias mapping
-   * @returns {Object}
-   */
-  get aliasMapping() {
-    return ByteArray.aliasMapping
-  }
-
-  /**
-   * Preserves the class (type) of an object when the object is encoded in Action Message Format (AMF).
-   * @param {String} aliasName
-   * @param {Object} classObject
-   */
-  static registerClassAlias(aliasName, classObject) {
-    if (!aliasName) {
-      throw new Error('Missing alias name.')
-    }
-
-    if (!classObject) {
-      throw new Error('Missing class object.')
-    }
-
-    this.classMapping[classObject] = aliasName
-    this.aliasMapping[aliasName] = classObject
   }
 
   /**
@@ -272,20 +215,6 @@ module.exports = class ByteArray {
       return decode(this.buffer.slice(position, this.position), charset)
     } else {
       throw new Error(`Invalid character set: '${charset}'.`)
-    }
-  }
-
-  /**
-   * Reads an object
-   * @returns {*}
-   */
-  readObject() {
-    if (this.objectEncoding === 0) {
-      return new AMF0(this).read()
-    } else if (this.objectEncoding === 3) {
-      return new AMF3(this).read()
-    } else {
-      throw new Error(`Unknown object encoding: '${this.objectEncoding}'.`)
     }
   }
 
@@ -449,20 +378,6 @@ module.exports = class ByteArray {
   }
 
   /**
-   * Writes an object
-   * @param {*} value
-   */
-  writeObject(value) {
-    if (this.objectEncoding === 0) {
-      return new AMF0(this).write(value)
-    } else if (this.objectEncoding === 3) {
-      return new AMF3(this).write(value)
-    } else {
-      throw new Error(`Unknown object encoding: '${this.objectEncoding}'.`)
-    }
-  }
-
-  /**
    * Writes a signed short
    * @param {Number} value
    */
@@ -512,3 +427,5 @@ module.exports = class ByteArray {
     this.writeMultiByte(value)
   }
 }
+
+module.exports = ByteArray;
