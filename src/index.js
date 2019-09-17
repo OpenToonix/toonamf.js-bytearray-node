@@ -21,16 +21,24 @@ class ByteArray {
      * Holds the data
      * @type {Buffer}
      */
-    this.buffer = Buffer.isBuffer(buffer) ? buffer : Array.isArray(buffer) ? Buffer.from(buffer) : Buffer.alloc(0)
+    this.buffer = null
     /**
      * The current position
      * @type {Number}
      */
-    this.position = 0
+    this.position = null
     /**
      * The byte order
      * @type {Boolean}
      */
+    this.endian = null
+
+    this.reset(buffer)
+  }
+
+  reset(buffer) {
+    this.buffer = Buffer.isBuffer(buffer) ? buffer : Array.isArray(buffer) ? Buffer.from(buffer) : Buffer.alloc(0)
+    this.position = 0
     this.endian = true
   }
 
