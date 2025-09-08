@@ -4,7 +4,7 @@
 
 A Node.js implementation of the Actionscript 3 ByteArray, based on bytearray-node by Zaseth.
 
-This project is also a forked version from `bytearray-node` from @Pyrodash.
+This project is also a forked version from [`bytearray-node` from @Pyrodash](https://github.com/Pyrodash).
 
 # Installation
 
