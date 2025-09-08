@@ -1,9 +1,9 @@
 {
-  "name": "bytearray-node",
+  "name": "@toonamfjs/bytearray-node",
   "version": "2.3.9",
-  "description": "A Node.js implementation of the Actionscript 3 ByteArray supporting AMF0/AMF3.",
+  "description": "A Node.js implementation of the Actionscript 3 ByteArray, based on bytearray-node by Zaseth.",
   "main": "src/index.js",
-  "homepage": "https://github.com/Zaseth/bytearray-node",
+  "homepage": "https://github.com/OpenToonix/toonamf.js-bytearray-node",
   "directories": {
     "test": "test"
   },
@@ -12,10 +12,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Zaseth/bytearray-node"
+    "url": "https://github.com/OpenToonix/toonamf.js-bytearray-node"
   },
   "bugs": {
-    "url": "https://github.com/Zaseth/bytearray-node/issues"
+    "url": "https://github.com/OpenToonix/toonamf.js-bytearray-node/issues"
   },
   "keywords": [
     "ByteArray",
@@ -29,6 +29,6 @@
   "devDependencies": {
     "tape": "^4.11.0"
   },
-  "author": "Zaseth",
+  "author": "Juansecu",
   "license": "MIT"
 }
